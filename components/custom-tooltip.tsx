@@ -14,12 +14,16 @@ Tooltip.displayName = "Tooltip"
 
 const TooltipTrigger = TooltipPrimitive.Trigger
 
-interface CustomTooltipContentProps extends React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content> {
-  direction?: "top" | "bottom" | "left" | "right"
+interface TooltipData {
   titleTop?: string
   titleMid?: string
   titleFooter?: string
   midColor?: string
+  direction?: "top" | "bottom" | "left" | "right"
+}
+
+interface CustomTooltipContentProps extends React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content> {
+  data: TooltipData // Changed from individual props to data object
 }
 
 const CustomTooltipContent = React.forwardRef<
@@ -30,15 +34,19 @@ const CustomTooltipContent = React.forwardRef<
     {
       className,
       sideOffset = 4,
+      data, // Using data object instead of individual props
+      ...props
+    },
+    ref,
+  ) => {
+    const {
       direction = "bottom",
       titleTop,
       titleMid,
       titleFooter,
       midColor = "#22c55e", // green-500 default
-      ...props
-    },
-    ref,
-  ) => {
+    } = data
+
     const getArrowStyles = () => {
       const baseArrow = "absolute w-0 h-0 border-solid"
       const arrowSize = "border-8"
@@ -104,4 +112,4 @@ const CustomTooltipContent = React.forwardRef<
 )
 CustomTooltipContent.displayName = TooltipPrimitive.Content.displayName
 
-export { Tooltip, TooltipTrigger, CustomTooltipContent, TooltipProvider }
+export { Tooltip, TooltipTrigger, CustomTooltipContent, TooltipProvider, type TooltipData }

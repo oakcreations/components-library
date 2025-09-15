@@ -1,5 +1,11 @@
 import { Timeline, type TimelineItem } from "@/components/timeline"
-import { Tooltip, TooltipTrigger, CustomTooltipContent, TooltipProvider } from "@/components/custom-tooltip"
+import {
+  Tooltip,
+  TooltipTrigger,
+  CustomTooltipContent,
+  TooltipProvider,
+  type TooltipData,
+} from "@/components/custom-tooltip"
 import { FileText, Building, DollarSign, Users, Send, Info } from "lucide-react"
 
 const timelineData: TimelineItem[] = [
@@ -36,6 +42,37 @@ const timelineData: TimelineItem[] = [
 ]
 
 export default function Home() {
+  const tooltipExamples: TooltipData[] = [
+    {
+      direction: "bottom",
+      titleTop: "Cadastros finalizados",
+      titleMid: "200",
+      titleFooter: "08:00",
+      midColor: "#22c55e",
+    },
+    {
+      direction: "top",
+      titleTop: "Vendas realizadas",
+      titleMid: "150",
+      titleFooter: "Hoje",
+      midColor: "#3b82f6",
+    },
+    {
+      direction: "left",
+      titleTop: "Usuários ativos",
+      titleMid: "1.2K",
+      titleFooter: "Online agora",
+      midColor: "#f59e0b",
+    },
+    {
+      direction: "right",
+      titleTop: "Alertas pendentes",
+      titleMid: "5",
+      titleFooter: "Requer atenção",
+      midColor: "#ef4444",
+    },
+  ]
+
   return (
     <main className="container mx-auto py-12 px-4 min-h-screen bg-gray-100">
       <div className="max-w-2xl mx-auto">
@@ -56,13 +93,7 @@ export default function Home() {
                     Cadastros (Bottom)
                   </button>
                 </TooltipTrigger>
-                <CustomTooltipContent
-                  direction="bottom"
-                  titleTop="Cadastros finalizados"
-                  titleMid="200"
-                  titleFooter="08:00"
-                  midColor="#22c55e"
-                />
+                <CustomTooltipContent data={tooltipExamples[0]} />
               </Tooltip>
 
               <Tooltip>
@@ -72,13 +103,7 @@ export default function Home() {
                     Vendas (Top)
                   </button>
                 </TooltipTrigger>
-                <CustomTooltipContent
-                  direction="top"
-                  titleTop="Vendas realizadas"
-                  titleMid="150"
-                  titleFooter="Hoje"
-                  midColor="#3b82f6"
-                />
+                <CustomTooltipContent data={tooltipExamples[1]} />
               </Tooltip>
 
               <Tooltip>
@@ -88,13 +113,7 @@ export default function Home() {
                     Usuários (Left)
                   </button>
                 </TooltipTrigger>
-                <CustomTooltipContent
-                  direction="left"
-                  titleTop="Usuários ativos"
-                  titleMid="1.2K"
-                  titleFooter="Online agora"
-                  midColor="#f59e0b"
-                />
+                <CustomTooltipContent data={tooltipExamples[2]} />
               </Tooltip>
 
               <Tooltip>
@@ -104,13 +123,7 @@ export default function Home() {
                     Alertas (Right)
                   </button>
                 </TooltipTrigger>
-                <CustomTooltipContent
-                  direction="right"
-                  titleTop="Alertas pendentes"
-                  titleMid="5"
-                  titleFooter="Requer atenção"
-                  midColor="#ef4444"
-                />
+                <CustomTooltipContent data={tooltipExamples[3]} />
               </Tooltip>
             </div>
           </TooltipProvider>
